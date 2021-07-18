@@ -1,0 +1,13 @@
+.nav-item{
+    font-size: 30px;
+}
+.brand-name{
+    font-family:cursive;
+    font-size: 50px;
+    color:aliceblue;
+    
+}
+.container-fluid{
+    padding-left: 5%;
+    padding-right: 5%;
+}
