@@ -8,7 +8,11 @@
     <form method="POST" action="">
         {{form.hidden_tag()}}
         <fieldset class="form-group">
-            <legend class="border-bottom"> Login Page</legend>
+            <legend class="border-bottom"> Sign Up Here</legend>
+            <div class="form-group">
+                {{form.username.label(class="form-control-label")}}
+                {{form.username(class="form-control form-control-md") }}
+            </div>
             <div class="form-group">
                 {{form.email.label(class="form-control-label")}}
                 {{form.email(class="form-control form-control-md") }}
@@ -17,17 +21,14 @@
                 {{form.password.label(class="form-control-label")}}
                 {{form.password(class="form-control form-control-md") }}
             </div>
-            <div class="form-check">
-                {{ form.remember_me(class="form-check-input") }}
-                {{ form.remember_me.label(class="form-check-label") }}
+            <div class="form-group">
+                {{form.confirm_password.label(class="form-control-label")}}
+                {{form.confirm_password(class="form-control form-control-md") }}
             </div>
             <div class="form-group pt-2">
                 {{form.submit(class="btn btn-primary")}}
             </div>
         </fieldset>
-        <small class="text-muted ml-2">
-            <a href="#">Forgot Password?</a>
-        </small>
         
     </form>
 
