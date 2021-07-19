@@ -6,53 +6,99 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-        rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
-        crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main.css')}}">
+
     <title>Votacion</title>
+    <script type="text/javascript">
+        function PopUp(hideOrshow) {
+            if (hideOrshow == 'hide') document.getElementById('ac-wrapper').style.display = "none";
+            else document.getElementById('ac-wrapper').removeAttribute('style');
+        }
+    </script>
+    <style>
+        body {
+            background:url("{{url_for('static',filename='img/main.png')}}") no-repeat center center fixed;
+            background-size: cover;
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
+    {%block style%}{%endblock%}
+    
+
+
+
 </head>
 
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <img src="{{url_for('static',filename='logo.jpg')}}" width=100 height=100 
-                alt="logo"
+            <img src="{{url_for('static',filename='img/logo.jpg')}}" width=100 height=100 alt="logo"
                 class="img-fluid img-thumbnail">
             <div class="brand-name">
                 Votacion
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" 
-                aria-controls="navbarSupportedContent" aria-expanded="false"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" 
-            id="navbarSupportedContent">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav  mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="{{_class[0]}}" {{ariacurrent[0]}} 
-                        href={{url_for('home')}}>Home</a>
+                        <a class="{{_class[0]}}" {{ariacurrent[0]}} href={{url_for('home')}}>Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="{{_class[1]}}" {{ariacurrent[1]}}  
-                        href={{url_for('login')}}>Login</a>
+                        <a class="{{_class[1]}}" {{ariacurrent[1]}} href={{url_for('login')}}>Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="{{_class[2]}}" {{ariacurrent[2]}} 
-                        href={{url_for('signup')}}>Sign Up</a>
+                        <a class="{{_class[2]}}" {{ariacurrent[2]}} href={{url_for('signup')}}>Sign Up</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    
-    {%block content%}{%endblock%}
-    
-    
+
+    <main role="main" class="container">
+
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <script>
+
+            setTimeout(function () {
+                PopUp('show');
+            }, 0);
+
+        </script>
+        <div id="ac-wrapper" style='display:none'>
+            <div id="popup">
+                <center>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Message</h5>
+                            <p class="card-text">{{message}}</p>
+                            <input type="button" name="close" value="close" onClick="PopUp('hide')"></input>
+                        </div>
+                    </div>
+                </center>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <div>
+            {% block content %}{% endblock %}
+        </div>
+        
+
+
+    </main>
+
 
 
     <!-- Bootstrap Bundle with Popper -->->

@@ -3,33 +3,78 @@
 {% set _class= _class %}
 {% set ariacurrent = ariacurrent%}
 
-{%block content %}
-<div class="container-fluid border border-3 _myform">
-    <form method="POST" action="">
-        {{form.hidden_tag()}}
-        <fieldset class="form-group">
-            <legend class="border-bottom"> Login Page</legend>
-            <div class="form-group">
-                {{form.email.label(class="form-control-label")}}
-                {{form.email(class="form-control form-control-md") }}
-            </div>
-            <div class="form-group">
-                {{form.password.label(class="form-control-label")}}
-                {{form.password(class="form-control form-control-md") }}
-            </div>
-            <div class="form-check">
-                {{ form.remember_me(class="form-check-input") }}
-                {{ form.remember_me.label(class="form-check-label") }}
-            </div>
-            <div class="form-group pt-2">
-                {{form.submit(class="btn btn-primary")}}
-            </div>
-        </fieldset>
-        <small class="text-muted ml-2">
-            <a href="#">Forgot Password?</a>
-        </small>
-        
-    </form>
+{%block style%}
+<style>
+    #login{
+    background:url("{{url_for('static',filename='img/login4.jpg')}}") center ;
+    background-repeat:no-repeat;
+    background-size:cover;
+    height: 900px;width:auto;
+    margin-right: -30%;
+    overflow: hidden;
+    margin-top: -30%;
+}
+</style>
+{%endblock style%}
 
-</div>
-{%endblock content%}
+{%block content %}
+<div style='width:100%;'>
+    <div style='width:50%;float:left'>
+        <div class="container-fluid border border-3 _myform">
+            <form method="POST" action="">
+                {{form.hidden_tag()}}
+                <fieldset class="form-group">
+                    <legend class="border-bottom"> Login Page</legend>
+                    <div class="form-group">
+                        {{form.email.label(class="form-control-label")}}
+
+                        {%if form.email.errors%}
+                        {{form.email(class="form-control form-control-md is-invalid") }}
+                        <div class="invalid-feedback">
+                            {%for error in form.email.errors%}
+                            <span>{{error}}</span>
+                            {%endfor%}
+                        </div>
+                        {%else%}
+                        {{form.email(class="form-control form-control-md") }}
+                        {%endif%}
+                    </div>
+                    <div class="form-group">
+                        {{form.password.label(class="form-control-label")}}
+
+                        {%if form.password.errors%}
+                        {{form.password(class="form-control form-control-md is-invalid") }}
+                        <div class="invalid-feedback">
+                            {%for error in form.password.errors%}
+                            <span>{{error}}</span>
+                            {%endfor%}
+                        </div>
+                        {%else%}
+                        {{form.password(class="form-control form-control-md") }}
+                        {%endif%}
+                    </div>
+                    <div class="form-check">
+                        {{ form.remember_me(class="form-check-input") }}
+                        {{ form.remember_me.label(class="form-check-label") }}
+                    </div>
+                    <div class="form-group pt-2">
+                        {{form.submit(class="btn btn-primary")}}
+                    </div>
+                </fieldset>
+                <div class="border-top pt-3">
+                    <small class="text-muted">
+                        <a href="#">Forgot Password?</a>
+                        Don't Have an Account? <a class="ml-2" href="{{ url_for('signup') }}">Sign Up Now</a>
+                    </small>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div style='width:50%;float:right'>
+        <div id='login'>
+            
+        </div>
+
+    </div>
+
+    {%endblock content%}

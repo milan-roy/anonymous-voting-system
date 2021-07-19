@@ -12,11 +12,18 @@
     padding-right: 5%;
 }
 ._myform{
-    margin-left: 30%;
-    margin-right: 30%;
-    margin-top: 3%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10%;
     width: auto;
     padding-top: 1%;
     padding-bottom: 2%;
+    background-color: aliceblue;
     
 }
+
+.card{
+    margin-top: 12px;
+    width: 100%;
+}
+
