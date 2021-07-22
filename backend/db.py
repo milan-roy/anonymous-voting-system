@@ -63,6 +63,18 @@ def does_email_exist(email):
     temp_tuple=(email,)
     return temp_tuple in email_list
 
+def does_email_and_password_match(email,password):
+    conn=get_conn()
+    cur=conn.cursor()
+    bcrypt=Bcrypt(current_app)
+    cur.execute("SELECT password from users where email=(%s)",(email,))
+    hashed_password=cur.fetchone()[0]
+    print(hashed_password)
+    conn.commit()
+    cur.close()
+    x= bcrypt.check_password_hash(hashed_password,password)
+    print(x)
+    return x
 
 
 @click.command('initdb', help='Initialise the database')

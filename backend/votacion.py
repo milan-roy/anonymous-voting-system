@@ -20,11 +20,14 @@ def home():
 def login():
     form = forms.logform()
     if form.validate_on_submit():
-        if form.email.data == 'milanroy.in@gmail.com' and form.password.data == '12345':
-            flash('Log in Successfull', 'success')
-            return redirect(url_for('votacion.home'))
-        else:
-            flash('Please check email and password', 'success')
+        if not db.does_email_exist(form.email.data):
+            flash("This email is not registered.")
+            return redirect(url_for('votacion.login'))
+        elif not db.does_email_and_password_match(form.email.data, form.password.data):
+            flash("Incorrect Password")
+            return redirect(url_for('votacion.login'))
+        flash('Log in Successfull', 'success')
+        return redirect(url_for('votacion.home'))
     return render_template('login.html',
                            _class=['nav-link ',
                                    'nav-link active', 'nav-link '],

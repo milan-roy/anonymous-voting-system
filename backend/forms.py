@@ -29,3 +29,9 @@ class logform (FlaskForm):
                              DataRequired(), Length(min=4)])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Log In')
+
+    def validate_email_and_password(self, email,password):
+        if not db.does_email_exist(email.data):
+            raise ValidationError("This email is not registered.")
+        elif not db.does_email_and_password_match(email.data, password.data):
+            raise ValidationError("Incorrect Password")
