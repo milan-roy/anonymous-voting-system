@@ -1,6 +1,8 @@
 from flask import current_app, render_template, url_for, flash,Blueprint
 from werkzeug.utils import redirect
 from . import forms
+from . import db
+
 
 bp = Blueprint("votacion","votacion", url_prefix='')
 
@@ -20,7 +22,7 @@ def login():
     if form.validate_on_submit():
         if form.email.data == 'milanroy.in@gmail.com' and form.password.data == '12345':
             flash('Log in Successfull', 'success')
-            return redirect(url_for('home'))
+            return redirect(url_for('votacion.home'))
         else:
             flash('Please check email and password', 'success')
     return render_template('login.html',
@@ -34,8 +36,9 @@ def login():
 def signup():
     form = forms.regform()
     if form.validate_on_submit():
-        flash('Congratulation, you are now a Votacion member.', 'success')
-        return redirect(url_for('home'))
+        db.adds_user(form)
+        flash('Registration Successfull. You can now Login.', 'success')
+        return redirect(url_for('votacion.login'))
     return render_template('signup.html',
                            _class=['nav-link ', 'nav-link ',
                                    'nav-link active'],

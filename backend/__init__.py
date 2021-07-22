@@ -1,6 +1,7 @@
-from flask import Flask
+from flask import Flask,g,current_app
 from . import votacion
 from . import db
+
 
 
 def create_app():
@@ -12,5 +13,6 @@ def create_app():
     
     app.register_blueprint(votacion.bp)
     db.init_app(app)
-
+   
+   
     return app
