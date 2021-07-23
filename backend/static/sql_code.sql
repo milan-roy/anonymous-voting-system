@@ -6,6 +6,7 @@ create table users(
     id serial primary key ,
     username varchar(15) not null unique,
     email text not null unique,
+    image_file text not null default '{{url_for("static",filename="img/logo.jpg")}}'
     password text not null,
     last_login timestamp with time zone not null
 );
