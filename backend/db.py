@@ -3,7 +3,7 @@ import click
 from flask import current_app, g
 from flask.cli import with_appcontext
 import datetime
-from . import forms,models
+from . import forms
 from flask_bcrypt import Bcrypt
 
 
@@ -75,19 +75,31 @@ def does_email_and_password_match(email,password):
     cur.close()
     return bcrypt.check_password_hash(hashed_password,password)
 
-def get_user_by_id(user_id):
+def filter_user(user_id=None,email=None,username=None):
+    from. import models
     conn=get_conn()
     cur=conn.cursor()
-    cur.execute("SELECT id,username,email,image_file,last_login from users where id=(%s)",(user_id,))
+    if user_id :
+        cur.execute("SELECT id,username,email,image_file,last_login from users where id=(%s)",(user_id,))
+    if email:
+        cur.execute("SELECT id,username,email,image_file,last_login from users where email=(%s)",(email,))
+    if username:
+        cur.execute("SELECT id,username,email,image_file,last_login from users where username=(%s)",(username,))
+    temp=cur.fetchone()
     cur.close()
-    temp=cur.fetchone()[0]
     user=models.User()
-    user.id=temp[0]
     user.username=temp[1]
+    user.id=temp[0]
     user.email=temp[2]
     user.image_file=temp[3]
     user.last_login=temp[4]
     return user
+
+def update_last_login(email):
+    conn=get_conn()
+    cur=conn.cursor()
+    cur.execute("update users set last_login=(%s) where email=(%s)",[datetime.datetime.now(),email])
+    cur.close()
 
 @click.command('initdb', help='Initialise the database')
 @with_appcontext

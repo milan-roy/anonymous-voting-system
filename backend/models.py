@@ -1,23 +1,20 @@
 from datetime import datetime
 from flask import current_app
 from flask_login import UserMixin
-from flask_login import LoginManager
+from . import login_manager
 from . import db
-
-
-login_manager = LoginManager(current_app)
 
 @login_manager.user_loader
 def load_user(user_id):
-    return db.get_user_by_id(user_id)
+    return db.filter_user(user_id=user_id)
         
 
 class User(UserMixin):
-    id = 0
-    username = ""
-    email = ""
-    image_file = ""
-    last_login =""
+    id = None
+    username =None
+    email =None
+    image_file =None
+    last_login =None
 
     
     def __repr__(self):

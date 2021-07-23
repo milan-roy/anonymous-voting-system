@@ -48,15 +48,31 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav  mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="{{_class[0]}}" {{ariacurrent[0]}} href={{url_for('votacion.home')}}>Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="{{_class[1]}}" {{ariacurrent[1]}} href={{url_for('votacion.login')}}>Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="{{_class[2]}}" {{ariacurrent[2]}} href={{url_for('votacion.signup')}}>Sign Up</a>
-                    </li>
+                    {%if current_user.is_authenticated%}
+                         <li class="nav-item">
+                            <h5 class=" mt-2 pt-1 me-2 username">Hi, {{current_user.username}}</h5>
+                        </li>
+                        <li class="nav-item">
+                            <a class="{{_class[0]}}" {{ariacurrent[0]}} href={{url_for('votacion.home')}}>Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="{{_class[1]}}" {{ariacurrent[1]}} href={{url_for('votacion.profile')}}>Profile</a>
+                        </li>
+                        <li class="nav-item">
+                             <a class="nav-link" href={{url_for('votacion.logout')}}>Logout</a>
+                        </li>
+                       
+                    {%else%}
+                        <li class="nav-item">
+                            <a class="{{_class[0]}}" {{ariacurrent[0]}} href={{url_for('votacion.home')}}>Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="{{_class[1]}}" {{ariacurrent[1]}} href={{url_for('votacion.login')}}>Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="{{_class[2]}}" {{ariacurrent[2]}} href={{url_for('votacion.signup')}}>Sign Up</a>
+                        </li>
+                    {%endif%}
                 </ul>
             </div>
         </div>
@@ -65,9 +81,9 @@
     <main role="main" class="container">
 
 
-        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% with messages = get_flashed_messages() %}
         {% if messages %}
-        {% for category, message in messages %}
+       
         <script>
 
             setTimeout(function () {
@@ -82,13 +98,13 @@
                         <div class="card-body">
                             <button type="button" class="btn-close" aria-label="Close" onclick='PopUp("hide")'>
                             </button>
-                            <span class="card-text">{{message}}</span>
+                            <span class="card-text">{{messages[0]}}</span>
                         </div>
                     </div>
                 </div>
             </div>
         </center>
-        {% endfor %}
+       
         {% endif %}
         {% endwith %}
         <div>
