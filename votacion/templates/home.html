@@ -1,0 +1,23 @@
+{%extends "base.html"%} {%block content%}
+
+<div class="container">
+  <div class="position-relative">
+    <div class="position-absolute top-50 start-50 translate-middle">
+      <div class="home-page">
+        <div class="home-content">
+          <p>Welcome to Votacion your one stop destination for polls.</p>
+            {%if current_user.is_authenticated%}
+                <a href="{{url_for('votacion.create_poll')}}">
+                    <button type="button" class="btn btn-dark">Get Started</button>
+                </a>
+            {%else%}
+                <a href="{{url_for('votacion.signup')}}">
+                    <button type="button" class="btn btn-dark">Get Started</button>
+                </a>
+            {%endif%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock content%}

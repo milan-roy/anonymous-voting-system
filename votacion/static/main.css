@@ -1,0 +1,96 @@
+.nav-item{
+    font-size: 23px;
+}
+.brand-name{
+    font-family:cursive;
+    font-size: 50px;
+    color:black;
+    
+}
+
+.full-width{
+    width:100%;
+       
+}
+.btn-close{
+    float: right;
+}
+
+.container-fluid{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+._myform{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10%;
+    width: auto;
+    padding-top: 1%;
+    padding-bottom: 2%;
+    background-color: aliceblue;
+    
+}
+
+.card{
+    margin-top: 12px;
+    width: 100%;
+}
+ .username{
+    font-size: 23px;
+ }
+.rounded-circle{
+    border-radius: 50px;
+    width: 200px;
+    height: 200px;
+}
+.rounded-circle-nav-bar{
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+}
+.user-content{
+    background-color:white;
+   
+}
+.float-left{
+    width: 50%;
+    float: left;
+}
+.float-right{
+    width: 50%;
+    float: right;
+}
+.home-page{
+    background-color:#f8f5f5;
+    margin-top: 123%;
+    height: 450px; 
+    width: 450px; 
+    border-radius: 50%;   
+    color:black;
+    
+}
+.home-content{
+    padding-left:8%;
+    padding-top:25%;
+    padding-right:8%;
+    text-align: center;
+    font-family: cursive;
+    font-size: 40px; 
+
+}
+.btn{
+    font-size: inherit;
+}
+.row{
+    padding: 1px;
+    
+}
+fieldset{
+    background-color: rgb(255, 255, 255);
+    margin: 2%;
+    padding: 2%;
+    
+    margin-left: 8%;
+    margin-right: 8%;
+    
+}

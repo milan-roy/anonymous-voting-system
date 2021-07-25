@@ -1,0 +1,102 @@
+{%extends "base.html"%}
+{%block script%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        var MaxInputs = 8; 
+        var InputsWrapper = $("#InputsWrapper"); 
+        var AddButton = $("#AddMoreFileBox");
+        var x = InputsWrapper.length; 
+        var FieldCount = 1; 
+
+        $(AddButton).click(function (e)  
+        {
+            if (x <= MaxInputs) 
+            {
+                FieldCount++; 
+               
+                $(InputsWrapper).append('<div class="row">\
+                <div class="col-md-7 offset-md-3">\
+                    <div class="form-group">\
+                        <div class="form-control form-control-md">\
+                            <input type="text" name="options[]"\
+                                class="form-control name_list"></input>\
+                        </div>\
+                    </div>\
+                </div>\
+                <div class="col-md-3">\
+                    <a href="#" class="btn btn-danger removeclass">×</a>\
+                </div>\
+                </div>');
+                x++; //text box increment
+            }
+            return false;
+        });
+
+        $("body").on("click", ".removeclass", function (e) { 
+            if (x > 1) {
+                $(this).parent('div').parent('div').remove(); 
+                x--; 
+            }
+            return false;
+        })
+        $('#submit').click(function () {
+            $.ajax({
+                url: "{{url_for('votacion.create_poll')}}",
+                method: "POST",
+                data: $('#add_options').serialize(),
+                success: function (data) {
+                   // alert(data)
+                   // $('#resultbox').html(data);
+                   $('#add_options')[0].reset();
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
+{% block content %}
+<center>
+<form name="add_options" id="add_options">
+
+    <fieldset class="form-group">
+        <legend > Create a Poll</legend>
+        <div class="row">
+            <div class="col-md-3">
+                <h4>Title</h4>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <div class="form-control form-control-md">
+                        <input type="text" name="options[]" 
+                            class="form-control name_list"></input>
+                    </div>
+                </div>
+            </div>
+        <div id="InputsWrapper">
+            <div class="row">
+                <div class="col-md-7 offset-md-3">
+                    <div class="form-group">
+                        <div class="form-control form-control-md">
+                            <input type="text" name="options[]" 
+                                class="form-control name_list"></input>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" name="add" id="AddMoreFileBox" class="btn btn-success">
+                        Add More
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group pt-2">
+            <input type="button" name="submit" id="submit" class="btn btn-info" value="Submit" />
+        </div>
+    </fieldset>
+
+</form>
+</center>
+
+{% endblock content %}
