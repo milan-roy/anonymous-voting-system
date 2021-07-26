@@ -1,4 +1,14 @@
 {%extends "base.html"%}
+
+{% set _class= _class %}
+{% set ariacurrent = ariacurrent%}
+{%block style%}
+<style>
+    body{
+        overflow-y: scroll;
+    }
+</style>
+{%endblock%}
 {%block script%}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
@@ -17,15 +27,15 @@
                 FieldCount++; 
                
                 $(InputsWrapper).append('<div class="row">\
-                <div class="col-md-7 offset-md-3">\
+                <div class="col offset-md-1">\
                     <div class="form-group">\
                         <div class="form-control form-control-md">\
                             <input type="text" name="options[]"\
-                                class="form-control name_list"></input>\
+                                class="form-control name_list" required></input>\
                         </div>\
                     </div>\
                 </div>\
-                <div class="col-md-3">\
+                <div class="col-md-2">\
                     <a href="#" class="btn btn-danger removeclass">×</a>\
                 </div>\
                 </div>');
@@ -58,29 +68,31 @@
 {% endblock %}
 {% block content %}
 <center>
-<form name="add_options" id="add_options">
+<form name="add_options" id="add_options" method="POST" action="{{url_for('votacion.create_poll')}}">
 
-    <fieldset class="form-group">
-        <legend > Create a Poll</legend>
+    <fieldset class="form-group" id='poll-field'>
+        <legend id="poll-legend"> Create a Poll</legend>
+        <h4 class="poll-text">Title</h4>
         <div class="row">
-            <div class="col-md-3">
-                <h4>Title</h4>
-            </div>
-            <div class="col-md-2">
+            <div class="col offset-md-1">
                 <div class="form-group">
                     <div class="form-control form-control-md">
-                        <input type="text" name="options[]" 
-                            class="form-control name_list"></input>
+                        <input type="text" name="title" 
+                            class="form-control" aria-describedby="titleText" required></input>
                     </div>
                 </div>
             </div>
+            <div class="col-md-2">
+
+            </div>
+        <h4 class="poll-text">Options</h4>
         <div id="InputsWrapper">
             <div class="row">
-                <div class="col-md-7 offset-md-3">
+                <div class="col offset-md-1">
                     <div class="form-group">
                         <div class="form-control form-control-md">
                             <input type="text" name="options[]" 
-                                class="form-control name_list"></input>
+                                class="form-control name_list" required></input>
                         </div>
                     </div>
                 </div>
@@ -91,8 +103,19 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col ">
+                    <span class="poll-text">
+                        Deadline
+                    </span>
+               
+                <input type="date" name="date" min="{{today}}" value="{{today}}"></input>
+                <input type="time" name="time" value="{{current_time}}"></input>
+                    
+            </div>
+            
         <div class="form-group pt-2">
-            <input type="button" name="submit" id="submit" class="btn btn-info" value="Submit" />
+            <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />
         </div>
     </fieldset>
 

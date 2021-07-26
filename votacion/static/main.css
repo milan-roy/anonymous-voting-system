@@ -1,3 +1,4 @@
+
 .nav-item{
     font-size: 23px;
 }
@@ -82,15 +83,26 @@
     font-size: inherit;
 }
 .row{
-    padding: 1px;
-    
+    padding-left: 1%;   
+    padding-right: 1%;   
+    padding-bottom: 1%;   
 }
-fieldset{
+#poll-field{
     background-color: rgb(255, 255, 255);
     margin: 2%;
     padding: 2%;
+    margin-left: 12%;
+    margin-right: 12%;
+    font-weight:bold;
     
-    margin-left: 8%;
-    margin-right: 8%;
-    
+}
+.poll-text{
+    font-weight: bold;
+    font-size: 35px;
+    font-family:cursive;
+}
+#poll-legend{
+    font-size: 35px;
+    margin-bottom:-1% ;
+    font-family:cursive;
 }

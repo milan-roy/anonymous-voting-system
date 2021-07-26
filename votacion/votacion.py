@@ -2,7 +2,7 @@ from flask import current_app, render_template, url_for, flash,Blueprint,request
 from werkzeug.utils import redirect
 from . import forms,db,models
 from flask_login import login_user, current_user, logout_user, login_required
-
+import datetime
 
 bp = Blueprint("votacion","votacion", url_prefix='')
 
@@ -30,7 +30,7 @@ def login():
             flash("Incorrect Password")
             return redirect(url_for('votacion.login'))
 
-        db.update_last_login(form.email.data)
+       
         user=db.filter_user(email=form.email.data)
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
@@ -81,10 +81,25 @@ def profile():
 @bp.route("/create_poll",methods=['GET', 'POST'])
 @login_required
 def create_poll():
+    today=datetime.date.today()
+    now = datetime.datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+
     if request.method == 'POST':
         options = request.form.getlist('options[]')
-        print(options)
-    
+        title=request.form.get('title')
+        date=request.form.get('date')
+        time=request.form.get('time')
+        end_date=date+' '+time
+        
+        if '' not in options and title!=None and date!=None and time!=None:
+            db.add_poll(title,options,end_date,current_user.id)
+            post_id=db.get_new_poll_id()
+            print (post_id)
     return render_template('create_poll.html', _class=['nav-link ',
                                    'nav-link', 'nav-link '],
-                           ariacurrent=['', '', ''])
+                           ariacurrent=['', '', ''],today=today, current_time=current_time)
+
+@bp.route('/poll/<poll_id>', methods=['GET','POST'])
+def show_poll(poll_id):
+    return render_template('show_poll.html',poll_id=poll_id)

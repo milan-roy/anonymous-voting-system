@@ -3,8 +3,12 @@
 {% set _class= _class %}
 {% set ariacurrent = ariacurrent%}
 
+
 {%block style%}
 <style>
+    body{
+        overflow-y: scroll;
+    }
     #login {
         background:url("{{url_for('static',filename='img/login.jpg')}}") center;
         background-repeat: no-repeat;

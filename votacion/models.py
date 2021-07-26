@@ -14,21 +14,20 @@ class User(UserMixin):
     username =None
     email =None
     image_file =None
-    last_login =None
 
-    
+      
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
 
 
-class Post():
-    id =0
-    title = ""
-    content = ""
-    auth_id = 0
-    creation_date= ""
-    end_date=""
+class Poll():
+    id =None
+    title =None
+    options_votes =None
+    auth_id =None
+    creation_date=None
+    end_date=None
     
 
     def __repr__(self):
-        return f"Post('{self.title}', '{self.date_posted}')"
+        return f"Poll('{self.title}', '{self.creation_date}')"

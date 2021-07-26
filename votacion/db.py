@@ -1,4 +1,5 @@
 import psycopg2 
+from psycopg2.extras import Json, DictCursor
 import click 
 from flask import current_app, g
 from flask.cli import with_appcontext
@@ -88,18 +89,31 @@ def filter_user(user_id=None,email=None,username=None):
     temp=cur.fetchone()
     cur.close()
     user=models.User()
-    user.username=temp[1]
     user.id=temp[0]
+    user.username=temp[1]
     user.email=temp[2]
     user.image_file=temp[3]
-    user.last_login=temp[4]
     return user
 
-def update_last_login(email):
+def add_poll(title,options,end_date,auth_id):
     conn=get_conn()
     cur=conn.cursor()
-    cur.execute("update users set last_login=(%s) where email=(%s)",[datetime.datetime.now(),email])
-    cur.close()
+    now=datetime.datetime.now()
+    creation_date =now.strftime("%Y-%m-%d %H:%M:%S")
+    options_vote={}
+    for i in options:
+        options_vote[i]=0
+    cur.execute("Insert into polls (title,options_votes,auth_id,creation_date,end_date) Values(%s,%s,%s,%s,%s)",[title,Json(options_vote),auth_id,creation_date,end_date])
+    conn.commit()
+    cur.close
+
+def get_new_poll_id():
+    conn=get_conn()
+    cur=conn.cursor()
+    cur.execute("Select id from polls")
+    id_list=cur.fetchall()
+    return id_list[-1][0]
+
 
 @click.command('initdb', help='Initialise the database')
 @with_appcontext

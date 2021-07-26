@@ -1,7 +1,18 @@
 {%extends "base.html"%}
+
+{% set _class= _class %}
+{% set ariacurrent = ariacurrent%}
+
+{%block style%}
+<style>
+    body{
+        overflow-y: scroll;
+    }
+</style>
+{%endblock%}
 {%block content%}
-<div style='width:100%;' class="user-content">
-    <div style='width:50%;float:left'>
+<div  class=" full-width user-content">
+    <div class="float-left">
         <div class="container">
             <center>
                 <img class="rounded-circle"

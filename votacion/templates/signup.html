@@ -3,9 +3,11 @@
 {% set _class= _class %}
 {% set ariacurrent = ariacurrent%}
 
-{%block content %}
 {%block style%}
 <style>
+    body{
+        overflow-y: scroll;
+    }
     #signup{
     background:url("{{url_for('static',filename='img/signup.jpg')}}") center ;
     background-repeat:no-repeat;
@@ -16,7 +18,7 @@
 }
 </style>
 {%endblock style%}
-
+{%block content %}
 <div class="full-width">
     <div class="float-left">
         <div id='signup'>
@@ -103,7 +105,5 @@
         
     </div>
 </div>
-
-
 
 {%endblock content%}
