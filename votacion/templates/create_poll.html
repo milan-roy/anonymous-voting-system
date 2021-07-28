@@ -2,30 +2,23 @@
 
 {% set _class= _class %}
 {% set ariacurrent = ariacurrent%}
-{%block style%}
-<style>
-    body{
-        overflow-y: scroll;
-    }
-</style>
-{%endblock%}
+
+
 {%block script%}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
 
-        var MaxInputs = 8; 
-        var InputsWrapper = $("#InputsWrapper"); 
+        var MaxInputs = 8;
+        var InputsWrapper = $("#InputsWrapper");
         var AddButton = $("#AddMoreFileBox");
-        var x = InputsWrapper.length; 
-        var FieldCount = 1; 
+        var x = InputsWrapper.length;
+        var FieldCount = 1;
 
-        $(AddButton).click(function (e)  
-        {
-            if (x <= MaxInputs) 
-            {
-                FieldCount++; 
-               
+        $(AddButton).click(function (e) {
+            if (x <= MaxInputs) {
+                FieldCount++;
+
                 $(InputsWrapper).append('<div class="row">\
                 <div class="col offset-md-1">\
                     <div class="form-group">\
@@ -44,10 +37,10 @@
             return false;
         });
 
-        $("body").on("click", ".removeclass", function (e) { 
+        $("body").on("click", ".removeclass", function (e) {
             if (x > 1) {
-                $(this).parent('div').parent('div').remove(); 
-                x--; 
+                $(this).parent('div').parent('div').remove();
+                x--;
             }
             return false;
         })
@@ -57,69 +50,106 @@
                 method: "POST",
                 data: $('#add_options').serialize(),
                 success: function (data) {
-                   // alert(data)
-                   // $('#resultbox').html(data);
-                   $('#add_options')[0].reset();
+                    // alert(data)
+                    // $('#resultbox').html(data);
+                    $('#add_options')[0].reset();
                 }
             });
         });
     });
+
+    function copyFunction() {
+        /* Get the text field */
+        var copyText = document.getElementById("myInput");
+
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+
+        /* Alert the copied text */
+        alert("Copied the text: " + copyText.value);
+    }
 </script>
 {% endblock %}
 {% block content %}
 <center>
-<form name="add_options" id="add_options" method="POST" action="{{url_for('votacion.create_poll')}}">
 
-    <fieldset class="form-group" id='poll-field'>
-        <legend id="poll-legend"> Create a Poll</legend>
-        <h4 class="poll-text">Title</h4>
-        <div class="row">
-            <div class="col offset-md-1">
-                <div class="form-group">
-                    <div class="form-control form-control-md">
-                        <input type="text" name="title" 
-                            class="form-control" aria-describedby="titleText" required></input>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
+    <form name="add_options" id="add_options" method="POST" action="{{url_for('votacion.create_poll')}}">
 
-            </div>
-        <h4 class="poll-text">Options</h4>
-        <div id="InputsWrapper">
+        <fieldset class="form-group form-field">
+            <legend id="poll-legend"> Create a Poll</legend>
+            <h4 class="poll-text">Title</h4>
             <div class="row">
                 <div class="col offset-md-1">
                     <div class="form-group">
                         <div class="form-control form-control-md">
-                            <input type="text" name="options[]" 
-                                class="form-control name_list" required></input>
+                            <input type="text" name="title" class="form-control" aria-describedby="titleText"
+                                required></input>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <button type="button" name="add" id="AddMoreFileBox" class="btn btn-success">
-                        Add More
-                    </button>
+
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col ">
-                    <span class="poll-text">
-                        Deadline
-                    </span>
-               
-                <input type="date" name="date" min="{{today}}" value="{{today}}"></input>
-                <input type="time" name="time" value="{{current_time}}"></input>
-                    
+                <h4 class="poll-text">Options</h4>
+                <div id="InputsWrapper">
+                    <div class="row">
+                        <div class="col offset-md-1">
+                            <div class="form-group">
+                                <div class="form-control form-control-md">
+                                    <input type="text" name="options[]" class="form-control name_list" required></input>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" name="add" id="AddMoreFileBox" class="btn btn-success">
+                                Add More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col ">
+                        <span class="poll-text">
+                            Deadline
+                        </span>
+
+                        <input type="date" name="date" min="{{today}}" value="{{today}}"></input>
+                        <input type="time" name="time" value="{{current_time}}"></input>
+
+                    </div>
+
+                    <div class="form-group pt-2">
+                        <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />
+                    </div>
+        </fieldset>
+
+    </form>
+    {%if poll_url%}
+    <div class="overlay">
+        <div class="container overlay-text">
+            The link for your poll is given below
+            <div class="row">
+               <div class="col-xs-4 ">
+
+                <input type="text" value="{{poll_url}}" id="myInput" > </input>
+               </div>
+               <div class="col-xs-4">
+                <button onclick="copyFunction()" class="mt-2">Copy text</button>
+               </div> 
+            
             </div>
             
-        <div class="form-group pt-2">
-            <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />
+                <button type="button" class="btn btn-primary"><a class="link-text" href="{{url_for('votacion.home')}}"> Go To Home</a> </button>
+            
+        
         </div>
-    </fieldset>
+    </div>
 
-</form>
+    {%endif%}
 </center>
 
 {% endblock content %}

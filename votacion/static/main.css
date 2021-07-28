@@ -63,7 +63,7 @@
 }
 .home-page{
     background-color:#f8f5f5;
-    margin-top: 123%;
+    margin-top: 4%;
     height: 450px; 
     width: 450px; 
     border-radius: 50%;   
@@ -87,7 +87,7 @@
     padding-right: 1%;   
     padding-bottom: 1%;   
 }
-#poll-field{
+.form-field{
     background-color: rgb(255, 255, 255);
     margin: 2%;
     padding: 2%;
@@ -105,4 +105,39 @@
     font-size: 35px;
     margin-bottom:-1% ;
     font-family:cursive;
+}
+#show_poll{
+    padding: 1%;
+}
+.overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(0,0,0,0.5); /*dim the background*/
+  }
+
+  .overlay-text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 22px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+  }
+ .link-text {
+    text-decoration: none;
+    color: inherit;
+}
+.all-polls{
+    background-color:rgb(255, 255, 255);
+    min-height:500px;
+    max-height: max-content;
+}
+a:hover{
+    text-decoration: none;
+    color: inherit;
 }

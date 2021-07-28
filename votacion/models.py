@@ -1,12 +1,6 @@
 from datetime import datetime
 from flask import current_app
 from flask_login import UserMixin
-from . import login_manager
-from . import db
-
-@login_manager.user_loader
-def load_user(user_id):
-    return db.filter_user(user_id=user_id)
         
 
 class User(UserMixin):
@@ -25,6 +19,7 @@ class Poll():
     title =None
     options_votes =None
     auth_id =None
+    emails=[' ']
     creation_date=None
     end_date=None
     
