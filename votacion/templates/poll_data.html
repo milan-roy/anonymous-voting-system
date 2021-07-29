@@ -1,0 +1,46 @@
+{%extends "base.html"%}
+{% set _class= _class %}
+{% set ariacurrent = ariacurrent%}
+
+{%block content%}
+
+<div class="row">
+    <div class="col">
+        <div class="container all-polls mt-5">
+            <center><h1 class="center pt-4"> {{poll.title}}</h1></center>
+            <div class="row">
+                <div class="col">Date of Creaton: {{poll.creation_date[:10]}}</div>
+                <div class="col offset-lg-6">Closing Date: {{poll.end_date[:10]}}</div>
+            </div>
+            <div class="row">
+                <div class="col">Time of Creaton: {{poll.creation_date[10:]}}</div>
+                <div class="col offset-lg-6">Closing Time: {{poll.end_date[10:]}}</div>
+            </div>
+            
+            <table class="table  table-striped">
+                <thead>
+                  <tr>
+                    
+                    <th scope="col">Option</th>
+                    <th scope="col">Votes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {%for i in poll.options_votes%}  
+                  <tr>
+                    <th scope="row">{{i}}</th>
+                    
+                    <td>{{poll.options_votes[i]}}</td>
+                    
+                  </tr>
+                {%endfor%}
+                </tbody>
+              </table>
+
+            
+        </div>
+    </div>
+</div>
+
+
+{%endblock content%}

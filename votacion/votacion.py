@@ -78,7 +78,7 @@ def logout():
 
 
 def save_picture(form_picture):
-    print(1)
+    
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
@@ -96,8 +96,9 @@ def save_picture(form_picture):
 def profile():
     form=forms.update_profile_form()
     if form.validate_on_submit():
+        
         if form.picture.data:
-            print(2)
+            
             picture_file = save_picture(form.picture.data)
             current_user.image_file = picture_file
         db.update_user(form,current_user.image_file,current_user.id) 
@@ -112,11 +113,11 @@ def profile():
 
 
 
-@bp.route("/user_polls",methods=['GET', 'POST'])
+@bp.route("/show_all_polls",methods=['GET', 'POST'])
 @login_required
-def user_polls():
+def show_all_polls():
     polls=db.get_all_polls(current_user.id)
-    return render_template('user_polls.html', _class=['nav-link ',
+    return render_template('show_all_polls.html', _class=['nav-link ',
                                    'nav-link ', 'nav-link '],
                            ariacurrent=[' ', ' ', ''], polls=polls)
 
@@ -171,6 +172,14 @@ def show_poll(poll_id):
             return redirect(url_for('votacion.home'))          
     
     return render_template('show_poll.html',_class=['nav-link ',
+                                   'nav-link', 'nav-link '],
+                           ariacurrent=['', '', ''],poll=poll)
+
+@bp.route('/poll_data/<poll_id>', methods=['GET','POST'])
+@login_required
+def poll_data(poll_id):
+    poll=db.get_poll(poll_id)
+    return render_template('poll_data.html',_class=['nav-link ',
                                    'nav-link', 'nav-link '],
                            ariacurrent=['', '', ''],poll=poll)
 

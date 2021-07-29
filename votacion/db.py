@@ -119,7 +119,10 @@ def delete_user(user_id):
 def update_user(form,picture_file,user_id):
     conn=get_conn()
     cur=conn.cursor()
-    cur.execute("update users set username=(%s),email=(%s),password=(%s),image_file=(%s)  where id=(%s)",[form.username.data,form.email.data,form.password.data,picture_file,user_id])
+    bcrypt = get_bcrypt()
+    hashed_password = bcrypt.generate_password_hash(
+        form.password.data).decode('utf-8')
+    cur.execute("update users set username=(%s),email=(%s),password=(%s),image_file=(%s)  where id=(%s)",[form.username.data,form.email.data,hashed_password,picture_file,user_id])
     conn.commit()
     cur.close()
 

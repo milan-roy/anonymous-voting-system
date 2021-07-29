@@ -5,8 +5,7 @@
 
 
 {%block content%}
-<div class="full-width">
-    <div class="float-left">
+
 <div class="row">
     <div class="col">
         <div class="container all-polls mt-5">
@@ -16,20 +15,13 @@
             {%else%}
                 <ol class="list-group">
                     {%for i in polls%}
-                    <a class="link-text" href="#" > <li class="list-group-item mt-2">  {{i[1]}}</li></a>
+                    <a class="link-text" href="{{url_for('votacion.poll_data',poll_id=i[0])}}" > <li class="list-group-item mt-2">  {{i[1]}}</li></a>
                     {%endfor%}
                 </ol>
             {%endif%}
         </div>
     </div>
 </div>
-</div>
-</div>
-<div class="float-right">
-    <div class="row">
-        <div class="col">
-            <div class="container all-polls mt-5">
-                <center><h1 class="center pt-4"> Your Polls</h1></center>
-</div>
+
 
 {%endblock content%}

@@ -16,16 +16,16 @@
                     <h2>{{ current_user.username }}</h2>
                     <p>{{ current_user.email }}</p>
 
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <a class="link-text" href="{{url_for('votacion.user_polls')}}">See all Polls </a>
-                    </button>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <a class="link-text" href="{{url_for('votacion.create_poll')}}">Create a poll </a>
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        <a class="link-text" href="{{url_for('votacion.delete_account')}}">Delete Account
-                        </a>
-                    </button>
+
+                    <a class="link-text" href="{{url_for('votacion.show_all_polls')}}"><button type="button"
+                            class="btn btn-primary">See all Polls </button></a>
+
+                    <a class="link-text" href="{{url_for('votacion.create_poll')}}"><button type="button" class="btn btn-primary"> Create a
+                            poll</button> </a>
+                    <a class="link-text" href="{{url_for('votacion.delete_account')}}"><button type="button"
+                            class="btn btn-primary">
+                            Delete Account</button> </a>
+
             </center>
         </div>
 
