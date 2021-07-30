@@ -23,6 +23,12 @@
 {%block content %}
 <div class="row">
     <div class="col-lg-6">
+        <div id='login'>
+
+        </div>
+
+    </div>
+    <div class="col-lg-6">
         <div class="container-fluid border border-3 _myform">
             <form method="POST" action="">
                 {{form.hidden_tag()}}
@@ -66,18 +72,13 @@
                 </fieldset>
                 <div class="border-top pt-3">
                     <small class="text-muted">
-                        <a href="#">Forgot Password?</a>
+                        
                         Don't Have an Account? <a class="ml-2" href="{{ url_for('votacion.signup') }}">Sign Up Now</a>
                     </small>
                 </div>
             </form>
         </div>
     </div>
-    <div class="col-lg-6">
-        <div id='login'>
-
-        </div>
-
-    </div>
+   
 
     {%endblock content%}
