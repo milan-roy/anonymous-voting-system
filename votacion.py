@@ -1,9 +1,9 @@
 from flask import current_app, render_template, url_for, flash,Blueprint,request
 from werkzeug.utils import redirect
-from . import forms,db,models
+import forms,db,models
 from flask_login import login_user, current_user, logout_user, login_required
 import datetime
-from . import login_manager
+from app import login_manager
 import os
 import secrets
 from PIL import Image
@@ -77,31 +77,13 @@ def logout():
     return redirect(url_for('votacion.home'))
 
 
-def save_picture(form_picture):
-    
-    random_hex = secrets.token_hex(8)
-    _, f_ext = os.path.splitext(form_picture.filename)
-    picture_fn = random_hex + f_ext
-    picture_path = os.path.join(current_app.root_path, 'static/img/profile', picture_fn)
-    print(picture_path)
-    output_size = (125, 125)
-    i = Image.open(form_picture)
-    i.thumbnail(output_size)
-    i.save(picture_path)
-
-    return picture_fn
 
 @bp.route("/profile",methods=['GET', 'POST'])
 @login_required
 def profile():
     form=forms.update_profile_form()
     if form.validate_on_submit():
-        
-        if form.picture.data:
-            
-            picture_file = save_picture(form.picture.data)
-            current_user.image_file = picture_file
-        db.update_user(form,current_user.image_file,current_user.id) 
+        db.update_user(form,current_user.id) 
         flash('Your account has been updated!')
         return redirect(url_for('votacion.profile'))    
 

@@ -6,7 +6,7 @@ create table users(
     id serial primary key ,
     username varchar(15) not null unique,
     email text not null unique,
-    image_file text not null default 'batman.png',
+    image_file text not null ,
     password text not null
 );
 

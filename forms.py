@@ -3,8 +3,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, EqualTo, Email, ValidationError
 from flask_login import  current_user
-from flask_wtf.file import FileField, FileAllowed
-from . import db
+
+import db
 
 
 class reg_form (FlaskForm):
@@ -47,7 +47,7 @@ class update_profile_form (FlaskForm):
                              DataRequired(), Length(min=4)])
     confirm_password = PasswordField('Confirm Password', validators=[
                                      DataRequired(), Length(min=4), EqualTo('password')])
-    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
+    
     update = SubmitField('Update')
 
     def validate_username(self, username):

@@ -97,15 +97,7 @@
                     {{form.confirm_password(class="form-control form-control-md") }}
                     {%endif%}
                 </div>
-                <div class="form-group">
-                    {{ form.picture.label() }}
-                    {{ form.picture(class="form-control-file") }}
-                    {% if form.picture.errors %}
-                    {% for error in form.picture.errors %}
-                    <span class="text-danger">{{ error }}</span></br>
-                    {% endfor %}
-                    {% endif %}
-                </div>
+                
                 <span class="form-group">
                     {{form.update(class="btn btn-primary mt-2")}}
                 </span>

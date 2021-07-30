@@ -4,9 +4,9 @@ import click
 from flask import current_app, g
 from flask.cli import with_appcontext
 import datetime
-from . import forms
+import random
 from flask_bcrypt import Bcrypt
-from. import models
+import models
 
 
 def get_conn():
@@ -51,8 +51,10 @@ def adds_user(form):
     bcrypt = get_bcrypt()
     hashed_password = bcrypt.generate_password_hash(
         form.password.data).decode('utf-8')
-    cur.execute("INSERT INTO users (username,email,password) VALUES(%s,%s,%s)", [
-                form.username.data, form.email.data, hashed_password])
+    images=['batman.png','black widow.png','flash.png','green lantern.png','hulk.png','iron man.png','spiderman.png','superman.png','supergirl.png','thor.png','witch.png']
+    image_file=random.choice(images)
+    cur.execute("INSERT INTO users (username,email,password,image_file) VALUES(%s,%s,%s,%s)", [
+                form.username.data, form.email.data, hashed_password,image_file])
     conn.commit()
     cur.close()
 
@@ -116,13 +118,13 @@ def delete_user(user_id):
     conn.commit()
     cur.close()
 
-def update_user(form,picture_file,user_id):
+def update_user(form,user_id):
     conn=get_conn()
     cur=conn.cursor()
     bcrypt = get_bcrypt()
     hashed_password = bcrypt.generate_password_hash(
         form.password.data).decode('utf-8')
-    cur.execute("update users set username=(%s),email=(%s),password=(%s),image_file=(%s)  where id=(%s)",[form.username.data,form.email.data,hashed_password,picture_file,user_id])
+    cur.execute("update users set username=(%s),email=(%s),password=(%s)  where id=(%s)",[form.username.data,form.email.data,hashed_password,user_id])
     conn.commit()
     cur.close()
 
