@@ -6,7 +6,6 @@
 
 {%block style%}
 <style>
-    
     #login {
         background:url("{{url_for('static',filename='img/login.png')}}") center;
         background-repeat: no-repeat;
@@ -32,7 +31,6 @@
                     <legend class="border-bottom"> Login Page</legend>
                     <div class="form-group">
                         {{form.email.label(class="form-control-label")}}
-
                         {%if form.email.errors%}
                         {{form.email(class="form-control form-control-md is-invalid") }}
                         <div class="invalid-feedback">
@@ -46,7 +44,6 @@
                     </div>
                     <div class="form-group">
                         {{form.password.label(class="form-control-label")}}
-
                         {%if form.password.errors%}
                         {{form.password(class="form-control form-control-md is-invalid") }}
                         <div class="invalid-feedback">

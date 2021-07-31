@@ -9,10 +9,6 @@
     
 }
 
-.full-width{
-    width:100%;
-       
-}
 .btn-close{
     float: right;
 }
@@ -53,14 +49,7 @@
     background-color:white;
    
 }
-.float-left{
-    width: 50%;
-    float: left;
-}
-.float-right{
-    width: 50%;
-    float: right;
-}
+
 .home-page{
     background-color:#f8f5f5;
     margin-top: 4%;

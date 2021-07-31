@@ -14,7 +14,6 @@ def get_conn():
         dbname = current_app.config['DATABASE']
         try:
             g.conn = psycopg2.connect("postgres://ejnatrvfztnojm:1df41ba287d48d1203edeb1a957630e0782bb1f3aee8c38c94d3d4ebd8be8d09@ec2-23-23-164-251.compute-1.amazonaws.com:5432/do6h4l6f1gn2i")
-
         except:
             return None
     return g.conn
