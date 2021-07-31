@@ -3,7 +3,6 @@
 {% set _class= _class %}
 {% set ariacurrent = ariacurrent%}
 
-
 {%block content%}
 <div class=" row user-content">
     <div class="col-lg-6">
@@ -11,104 +10,86 @@
             <center>
                 <img class="rounded-circle"
                     src="{{url_for('static', filename='img/profile/'+current_user.image_file)}}">
-
                 <div class="user-content p-3">
                     <h2>{{ current_user.username }}</h2>
                     <p>{{ current_user.email }}</p>
-
-
                     <a class="link-text" href="{{url_for('votacion.show_all_polls')}}"><button type="button"
                             class="btn btn-primary">See all Polls </button></a>
-
                     <a class="link-text" href="{{url_for('votacion.create_poll')}}"><button type="button" class="btn btn-primary"> Create a
                             poll</button> </a>
                     <a class="link-text" href="{{url_for('votacion.delete_account')}}"><button type="button"
                             class="btn btn-primary">
                             Delete Account</button> </a>
-
             </center>
         </div>
-
     </div>
-</div>
-<div class="col-lg-6 ">
-
-
-    <div class="form-field p-4 mt-4">
-        <center>
-            <h2>Update your Account Information.</h2>
-        </center>
-        <form method="POST" action="">
-            {{form.hidden_tag()}}
-            <fieldset class="from-group ">
-                <div class="form-group">
-                    {{form.username.label(class="form-control-label")}}
-
-                    {%if form.username.errors%}
-                    {{form.username(class="form-control form-control-md is-invalid") }}
-                    <div class="invalid-feedback">
-                        {%for error in form.username.errors%}
-                        <span>{{error}}</span>
-                        {%endfor%}
+    <div class="col-lg-6 ">
+        <div class="form-field p-4 mt-4">
+            <center>
+                <h2>Update your Account Information.</h2>
+            </center>
+            <form method="POST" action="">
+                {{form.hidden_tag()}}
+                <fieldset class="from-group ">
+                    <div class="form-group">
+                        {{form.username.label(class="form-control-label")}}
+                        {%if form.username.errors%}
+                        {{form.username(class="form-control form-control-md is-invalid") }}
+                        <div class="invalid-feedback">
+                            {%for error in form.username.errors%}
+                            <span>{{error}}</span>
+                            {%endfor%}
+                        </div>
+                        {%else%}
+                        {{form.username(class="form-control form-control-md") }}
+                        {%endif%}
                     </div>
-                    {%else%}
-                    {{form.username(class="form-control form-control-md") }}
-                    {%endif%}
-                </div>
-                <div class="form-group">
-                    {{form.email.label(class="form-control-label")}}
-
-                    {%if form.email.errors%}
-                    {{form.email(class="form-control form-control-md is-invalid") }}
-                    <div class="invalid-feedback">
-                        {%for error in form.email.errors%}
-                        <span>{{error}}</span>
-                        {%endfor%}
+                    <div class="form-group">
+                        {{form.email.label(class="form-control-label")}}
+                        {%if form.email.errors%}
+                        {{form.email(class="form-control form-control-md is-invalid") }}
+                        <div class="invalid-feedback">
+                            {%for error in form.email.errors%}
+                            <span>{{error}}</span>
+                            {%endfor%}
+                        </div>
+                        {%else%}
+                        {{form.email(class="form-control form-control-md") }}
+                        {%endif%}
                     </div>
-                    {%else%}
-                    {{form.email(class="form-control form-control-md") }}
-                    {%endif%}
-                </div>
-                <div class="form-group">
-                    {{form.password.label(class="form-control-label")}}
-
-                    {%if form.password.errors%}
-                    {{form.password(class="form-control form-control-md is-invalid") }}
-                    <div class="invalid-feedback">
-                        {%for error in form.password.errors%}
-                        <span>{{error}}</span>
-                        {%endfor%}
+                    <div class="form-group">
+                        {{form.password.label(class="form-control-label")}}
+                        {%if form.password.errors%}
+                        {{form.password(class="form-control form-control-md is-invalid") }}
+                        <div class="invalid-feedback">
+                            {%for error in form.password.errors%}
+                            <span>{{error}}</span>
+                            {%endfor%}
+                        </div>
+                        {%else%}
+                        {{form.password(class="form-control form-control-md") }}
+                        {%endif%}
                     </div>
-                    {%else%}
-                    {{form.password(class="form-control form-control-md") }}
-                    {%endif%}
-                </div>
-                <div class="form-group">
-                    {{form.confirm_password.label(class="form-control-label")}}
-
-                    {%if form.confirm_password.errors%}
-                    {{form.confirm_password(class="form-control form-control-md is-invalid") }}
-                    <div class="invalid-feedback">
-                        {%for error in form.confirm_password.errors%}
-                        <span>{{error}}</span>
-                        {%endfor%}
+                    <div class="form-group">
+                        {{form.confirm_password.label(class="form-control-label")}}
+                        {%if form.confirm_password.errors%}
+                        {{form.confirm_password(class="form-control form-control-md is-invalid") }}
+                        <div class="invalid-feedback">
+                            {%for error in form.confirm_password.errors%}
+                            <span>{{error}}</span>
+                            {%endfor%}
+                        </div>
+                        {%else%}
+                        {{form.confirm_password(class="form-control form-control-md") }}
+                        {%endif%}
                     </div>
-                    {%else%}
-                    {{form.confirm_password(class="form-control form-control-md") }}
-                    {%endif%}
-                </div>
-                
-                <span class="form-group">
-                    {{form.update(class="btn btn-primary mt-2")}}
-                </span>
-
-
-            </fieldset>
-
-        </form>
+                    <span class="form-group">
+                        {{form.update(class="btn btn-primary mt-2")}}
+                    </span>
+                </fieldset>
+            </form>
+        </div>
     </div>
-
-
 </div>
 
 {%endblock content%}

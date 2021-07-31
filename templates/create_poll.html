@@ -59,26 +59,17 @@
     });
 
     function copyFunction() {
-       
         var copyText = document.getElementById("myInput");
-
-        
         copyText.select();
-        copyText.setSelectionRange(0, 99999); 
-
-        
+        copyText.setSelectionRange(0, 99999);
         document.execCommand("copy");
-
-        
-        
     }
 </script>
-{% endblock %}
+{% endblock script%}
+
 {% block content %}
 <center>
-
     <form name="add_options" id="add_options" method="POST" action="{{url_for('votacion.create_poll')}}">
-
         <fieldset class="form-group form-field">
             <legend id="poll-legend"> Create a Poll</legend>
             <h4 class="poll-text">Title</h4>
@@ -92,7 +83,6 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-
                 </div>
                 <h4 class="poll-text">Options</h4>
                 <div id="InputsWrapper">
@@ -116,40 +106,30 @@
                         <span class="poll-text">
                             Deadline
                         </span>
-
                         <input type="date" name="date" min="{{today}}" value="{{today}}"></input>
                         <input type="time" name="time" value="{{current_time}}"></input>
-
                     </div>
-
                     <div class="form-group pt-2">
                         <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />
                     </div>
         </fieldset>
-
     </form>
     {%if poll_url%}
     <div class="overlay">
         <div class="container overlay-text">
             The link for your poll is given below
             <div class="row">
-               <div class="col-xs-4 ">
-
-                <input type="text" value="{{poll_url}}" id="myInput" > </input>
-               </div>
-               <div class="col-xs-4">
-                <button onclick="copyFunction()" class="mt-2">Copy text</button>
-               </div> 
-            
+                <div class="col-xs-4 ">
+                    <input type="text" value="{{poll_url}}" id="myInput"> </input>
+                </div>
+                <div class="col-xs-4">
+                    <button onclick="copyFunction()" class="mt-2">Copy text</button>
+                </div>
             </div>
-            
-                <button type="button" class="btn btn-primary"><a class="link-text" href="{{url_for('votacion.home')}}"> Go To Home</a> </button>
-            
-        
+            <button type="button" class="btn btn-primary"><a class="link-text" href="{{url_for('votacion.home')}}"> Go
+                    To Home</a> </button>
         </div>
     </div>
-
     {%endif%}
 </center>
-
 {% endblock content %}

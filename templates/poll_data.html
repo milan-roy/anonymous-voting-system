@@ -16,11 +16,9 @@
                 <div class="col">Time of Creaton: {{poll.creation_date[10:]}}</div>
                 <div class="col offset-lg-6">Closing Time: {{poll.end_date[10:]}}</div>
             </div>
-            
             <table class="table  table-striped">
                 <thead>
                   <tr>
-                    
                     <th scope="col">Option</th>
                     <th scope="col">Votes</th>
                   </tr>
@@ -29,18 +27,13 @@
                 {%for i in poll.options_votes%}  
                   <tr>
                     <th scope="row">{{i}}</th>
-                    
                     <td>{{poll.options_votes[i]}}</td>
-                    
                   </tr>
                 {%endfor%}
                 </tbody>
               </table>
-
-            
         </div>
     </div>
 </div>
-
 
 {%endblock content%}

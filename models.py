@@ -1,4 +1,3 @@
-
 from flask import current_app
 from flask_login import UserMixin
         
@@ -8,11 +7,7 @@ class User(UserMixin):
     username =None
     email =None
     image_file =None
-
       
-    def __repr__(self):
-        return f"User('{self.username}', '{self.email}', '{self.image_file}')"
-
 
 class Poll():
     id =None
@@ -23,6 +18,3 @@ class Poll():
     creation_date=None
     end_date=None
     
-
-    def __repr__(self):
-        return f"Poll('{self.title}', '{self.creation_date}')"

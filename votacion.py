@@ -4,9 +4,6 @@ import forms,db,models
 from flask_login import login_user, current_user, logout_user, login_required
 import datetime
 from app import login_manager
-import os
-import secrets
-from PIL import Image
 
 bp = Blueprint("votacion","votacion", url_prefix='')
 @login_manager.user_loader
@@ -77,7 +74,6 @@ def logout():
     return redirect(url_for('votacion.home'))
 
 
-
 @bp.route("/profile",methods=['GET', 'POST'])
 @login_required
 def profile():
@@ -117,7 +113,6 @@ def create_poll():
         title=request.form.get('title')
         date=request.form.get('date')
         time=request.form.get('time')
-        
         end_date=date+' '+time
         
         if '' not in options and title!=None and date!=None and time!=None:

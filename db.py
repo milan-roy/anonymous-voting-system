@@ -188,9 +188,6 @@ def get_all_polls(auth_id):
 
 
 
-
-
-
 @click.command('initdb', help='Initialise the database')
 @with_appcontext
 def init_db_command():

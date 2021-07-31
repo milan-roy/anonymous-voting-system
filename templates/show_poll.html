@@ -3,10 +3,7 @@
 {% set _class= _class %}
 {% set ariacurrent = ariacurrent%}
 
-
-
 {%block content%}
-
 
 <div class="container">
     <form name="show_poll" id="show_poll" method="POST">
@@ -14,13 +11,10 @@
             <legend id="poll-legend"> {{poll.title}}</legend>
             <label for="email">Please enter an email address</label>
             <div class="form-group">
-                
                 <div class="form-control form-control-md">
-
                     <input type="email" class="form-control" name="email"  placeholder="Enter your email" required>
                 </div>
             </div>
-        
             <label id="show_poll" for="email">Please choose an option</label>
             {%for i in poll.options_votes.keys()%}
             <div class="form-check">
@@ -30,14 +24,11 @@
                         {{i}}
                     </label>
                 </div>
-
-
             </div>
             {%endfor%}
             <button type="submit" class="btn btn-primary">Submit</button>
         </fieldset>
     </form>
-
 </div>
 
 {%endblock content%}
